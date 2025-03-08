@@ -1,7 +1,7 @@
 {
   "versions": {
     "1.0.0": {
-      "imageName": "runpod/worker-comfy:latest",
+      "imageName": "timpietruskyblibla/runpod-worker-comfy:3.4.0-sdxl",
       "minimumCudaVersion": "11.8",
       "categories": [
         {
