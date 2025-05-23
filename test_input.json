@@ -24,18 +24,24 @@
       },
       "5": {
         "inputs": {
-          "width": 512,
-          "height": 512,
+          "width": 1024,
+          "height": 1024,
           "batch_size": 1
         },
-        "class_type": "EmptyLatentImage"
+        "class_type": "EmptyLatentImage",
+        "_meta": {
+          "title": "Empty Latent Image"
+        }
       },
       "6": {
         "inputs": {
-          "text": "beautiful scenery nature glass bottle landscape, purple galaxy bottle,",
-          "clip": ["4", 1]
+          "text": "A cinematic 3/4 shot, focusing on the detailed face of a 38-year-old Bengali woman with pale skin.  Her expression is a soft, romantic smile, her gaze directly engaging the camera.  Noticeable features include meticulously applied eyeliner and thick kohl, dark blue eyeshadows, and a black bindi. The texture of her skin is realistically rendered, showcasing pores, subtle acne, and delicate goosebumps.  Her brown hair is pulled back into a neat braided bun.  Full lips are painted a deep maroon shade, complementing her maroon off-shoulder frock, which drapes elegantly. The woman's pose is relaxed yet captivating, her shoulders slightly slumped, conveying a sense of intimacy. The setting is the warm, intimate interior of a restaurant, softly lit to highlight her features.  The background is blurred, suggesting depth of field, with warm hues of amber and brown suggesting a sophisticated ambiance. The overall atmosphere is romantic and intimate, reminiscent of classic cinematic portraiture, using a shallow depth of field to emphasize the woman's beauty and emotional vulnerability.  The lighting is soft and diffused, enhancing the textures and the warm tones of her skin and clothing.  The style is photorealistic with a painterly touch, evoking the emotive power of classic portrait photography.",
+          "clip": ["11", 0]
         },
-        "class_type": "CLIPTextEncode"
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Combined Prompt)"
+        }
       },
       "7": {
         "inputs": {
@@ -46,17 +52,107 @@
       },
       "8": {
         "inputs": {
-          "samples": ["3", 0],
-          "vae": ["4", 2]
+          "samples": ["13", 0],
+          "vae": ["10", 0]
         },
-        "class_type": "VAEDecode"
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAE Decode"
+        }
       },
       "9": {
         "inputs": {
-          "filename_prefix": "ComfyUI/test",
+          "filename_prefix": "ComfyUI",
           "images": ["8", 0]
         },
-        "class_type": "SaveImage"
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "Save Image"
+        }
+      },
+      "10": {
+        "inputs": {
+          "vae_name": "ae.safetensors"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "Load VAE"
+        }
+      },
+      "11": {
+        "inputs": {
+          "clip_name1": "t5xxl_fp8_e4m3fn.safetensors",
+          "clip_name2": "clip_l.safetensors",
+          "type": "flux"
+        },
+        "class_type": "DualCLIPLoader",
+        "_meta": {
+          "title": "DualCLIPLoader"
+        }
+      },
+      "12": {
+        "inputs": {
+          "unet_name": "flux1-dev.safetensors",
+          "weight_dtype": "fp8_e4m3fn"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "Load Diffusion Model"
+        }
+      },
+      "13": {
+        "inputs": {
+          "noise": ["25", 0],
+          "guider": ["22", 0],
+          "sampler": ["16", 0],
+          "sigmas": ["17", 0],
+          "latent_image": ["5", 0],
+          "cfg_scale": 6
+        },
+        "class_type": "SamplerCustomAdvanced",
+        "_meta": {
+          "title": "SamplerCustomAdvanced"
+        }
+      },
+      "16": {
+        "inputs": {
+          "sampler_name": "euler"
+        },
+        "class_type": "KSamplerSelect",
+        "_meta": {
+          "title": "KSamplerSelect"
+        }
+      },
+      "17": {
+        "inputs": {
+          "scheduler": "sgm_uniform",
+          "steps": 20,
+          "denoise": 1,
+          "model": ["12", 0]
+        },
+        "class_type": "BasicScheduler",
+        "_meta": {
+          "title": "BasicScheduler"
+        }
+      },
+      "22": {
+        "inputs": {
+          "model": ["12", 0],
+          "conditioning": ["6", 0]
+        },
+        "class_type": "BasicGuider",
+        "_meta": {
+          "title": "BasicGuider"
+        }
+      },
+      "25": {
+        "inputs": {
+          "noise_seed": 0
+        },
+        "class_type": "RandomNoise",
+        "_meta": {
+          "title": "RandomNoise"
+        }
       }
     }
   }
