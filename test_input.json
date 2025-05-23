@@ -1,27 +1,6 @@
 {
   "input": {
     "workflow": {
-      "3": {
-        "inputs": {
-          "seed": 234234,
-          "steps": 20,
-          "cfg": 8,
-          "sampler_name": "euler",
-          "scheduler": "normal",
-          "denoise": 1,
-          "model": ["4", 0],
-          "positive": ["6", 0],
-          "negative": ["7", 0],
-          "latent_image": ["5", 0]
-        },
-        "class_type": "KSampler"
-      },
-      "4": {
-        "inputs": {
-          "ckpt_name": "sd_xl_base_1.0.safetensors"
-        },
-        "class_type": "CheckpointLoaderSimple"
-      },
       "5": {
         "inputs": {
           "width": 1024,
@@ -35,20 +14,13 @@
       },
       "6": {
         "inputs": {
-          "text": "A cinematic 3/4 shot, focusing on the detailed face of a 38-year-old Bengali woman with pale skin.  Her expression is a soft, romantic smile, her gaze directly engaging the camera.  Noticeable features include meticulously applied eyeliner and thick kohl, dark blue eyeshadows, and a black bindi. The texture of her skin is realistically rendered, showcasing pores, subtle acne, and delicate goosebumps.  Her brown hair is pulled back into a neat braided bun.  Full lips are painted a deep maroon shade, complementing her maroon off-shoulder frock, which drapes elegantly. The woman's pose is relaxed yet captivating, her shoulders slightly slumped, conveying a sense of intimacy. The setting is the warm, intimate interior of a restaurant, softly lit to highlight her features.  The background is blurred, suggesting depth of field, with warm hues of amber and brown suggesting a sophisticated ambiance. The overall atmosphere is romantic and intimate, reminiscent of classic cinematic portraiture, using a shallow depth of field to emphasize the woman's beauty and emotional vulnerability.  The lighting is soft and diffused, enhancing the textures and the warm tones of her skin and clothing.  The style is photorealistic with a painterly touch, evoking the emotive power of classic portrait photography.",
+          "text": "grey cat wearing a harry potter hat and programming in javascript in its ultramodern computer",
           "clip": ["11", 0]
         },
         "class_type": "CLIPTextEncode",
         "_meta": {
-          "title": "CLIP Text Encode (Combined Prompt)"
+          "title": "CLIP Text Encode (Prompt)"
         }
-      },
-      "7": {
-        "inputs": {
-          "text": "text, watermark",
-          "clip": ["4", 1]
-        },
-        "class_type": "CLIPTextEncode"
       },
       "8": {
         "inputs": {
@@ -106,8 +78,7 @@
           "guider": ["22", 0],
           "sampler": ["16", 0],
           "sigmas": ["17", 0],
-          "latent_image": ["5", 0],
-          "cfg_scale": 6
+          "latent_image": ["5", 0]
         },
         "class_type": "SamplerCustomAdvanced",
         "_meta": {
@@ -126,7 +97,7 @@
       "17": {
         "inputs": {
           "scheduler": "sgm_uniform",
-          "steps": 20,
+          "steps": 4,
           "denoise": 1,
           "model": ["12", 0]
         },
@@ -147,7 +118,7 @@
       },
       "25": {
         "inputs": {
-          "noise_seed": 0
+          "noise_seed": 108076821791990
         },
         "class_type": "RandomNoise",
         "_meta": {
