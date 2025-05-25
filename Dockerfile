@@ -74,8 +74,7 @@ RUN wget --header="Authorization: Bearer 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" 
     wget -O models/loras/Ivory_Stranger_Flux_LoRA_v1.0.safetensors https://huggingface.co/shahtab/IvoryStranger/resolve/main/Ivory%20Stranger%20-%20Flux%20LoRA%20%20_v1.0.safetensors && \
     wget -O models/loras/flux_topless_v1.safetensors https://huggingface.co/shahtab/FluxTopless/resolve/main/flux_topless_v1.safetensors && \
     wget -O models/loras/aidmaNSFWunlock-FLUX-V0.2.safetensors https://huggingface.co/shahtab/FLUXNSFWunlock/resolve/main/aidmaNSFWunlock-FLUX-V0.2.safetensors && \
-    wget -O models/loras/FC_Flux_Perfect_Busts.safetensors https://huggingface.co/shahtab/FluxPonyPerfectFull/resolve/main/FC%20Flux%20Perfect%20Busts.safetensors && \
-    wget -O models/loras/flux_uncensored_nsfw_v2.safetensors https://huggingface.co/imagepipeline/flux_uncensored_nsfw_v2/resolve/main/lora.safetensors
+    wget -O models/loras/FC_Flux_Perfect_Busts.safetensors https://huggingface.co/shahtab/FluxPonyPerfectFull/resolve/main/FC%20Flux%20Perfect%20Busts.safetensors
     
 # Stage 3: Final image
 FROM base as final
