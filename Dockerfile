@@ -72,9 +72,10 @@ RUN wget --header="Authorization: Bearer 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" 
     wget -O models/clip/t5xxl_fp8_e4m3fn.safetensors https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors && \
     wget --header="Authorization: Bearer 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" -O models/vae/ae.safetensors https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors && \
     wget -O models/loras/Ivory_Stranger_Flux_LoRA_v1.0.safetensors https://huggingface.co/shahtab/IvoryStranger/resolve/main/Ivory%20Stranger%20-%20Flux%20LoRA%20%20_v1.0.safetensors && \
-    wget -O models/loras/Mars_Street_Diesel_Punk_Style_v1.0.safetensors https://huggingface.co/shahtab/Marsstreet/resolve/main/Mars%20Street%20_%20Diesel%20Punk%20Style_v1.0.safetensors && \
-    wget -O models/loras/Vector_Mascot_Logo_Design_V1.0.safetensors https://huggingface.co/shahtab/VectorMascotLogoDesign/resolve/main/Vector%20Mascot%20Logo%20Design_V1.0.safetensors && \
-    wget -O models/loras/TrendFig_Trendy_Character_IP.safetensors https://huggingface.co/shahtab/TrendFig/resolve/main/TrendFig%20-%20Trendy%20Character%20IP_TrendFig%20-%20Trendy%20character%20IP.safetensors
+    wget -O models/loras/flux_topless_v1.safetensors https://huggingface.co/shahtab/FluxTopless/resolve/main/flux_topless_v1.safetensors && \
+    wget -O models/loras/aidmaNSFWunlock-FLUX-V0.2.safetensors https://huggingface.co/shahtab/FLUXNSFWunlock/resolve/main/aidmaNSFWunlock-FLUX-V0.2.safetensors && \
+    wget -O models/loras/FC_Flux_Perfect_Busts.safetensors https://huggingface.co/shahtab/FluxPonyPerfectFull/resolve/main/FC%20Flux%20Perfect%20Busts.safetensors && \
+    wget -O models/loras/flux_uncensored_nsfw_v2.safetensors https://huggingface.co/imagepipeline/flux_uncensored_nsfw_v2/resolve/main/lora.safetensors
     
 # Stage 3: Final image
 FROM base as final
