@@ -51,6 +51,13 @@ ADD *snapshot*.json /
 # Restore the snapshot to install custom nodes
 RUN /restore_snapshot.sh
 
+# Install required custom nodes for upscaler
+RUN cd /comfyui/custom_nodes && \
+    git clone https://github.com/yolain/ComfyUI-Easy-Use.git && \
+    git clone https://github.com/rgthree/rgthree-comfy.git && \
+    git clone https://github.com/city96/ComfyUI-GGUF.git && \
+    git clone https://github.com/shiimizu/ComfyUI-TiledDiffusion.git
+
 # Start container
 CMD ["/start.sh"]
 
@@ -64,7 +71,7 @@ ARG MODEL_TYPE=flux1-dev
 WORKDIR /comfyui
 
 # Create necessary directories
-RUN mkdir -p models/checkpoints models/vae models/unet models/clip models/loras
+RUN mkdir -p models/checkpoints models/vae models/unet models/clip models/loras models/upscale_models models/diffusion_models
 
 # Download flux1-dev model and its components
 RUN wget --header="Authorization: Bearer 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" -O models/unet/flux1-dev.safetensors https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors && \
@@ -74,7 +81,11 @@ RUN wget --header="Authorization: Bearer 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" 
     wget -O models/loras/Ivory_Stranger_Flux_LoRA_v1.0.safetensors https://huggingface.co/shahtab/IvoryStranger/resolve/main/Ivory%20Stranger%20-%20Flux%20LoRA%20%20_v1.0.safetensors && \
     wget -O models/loras/flux_topless_v1.safetensors https://huggingface.co/shahtab/FluxTopless/resolve/main/flux_topless_v1.safetensors && \
     wget -O models/loras/aidmaNSFWunlock-FLUX-V0.2.safetensors https://huggingface.co/shahtab/FLUXNSFWunlock/resolve/main/aidmaNSFWunlock-FLUX-V0.2.safetensors && \
-    wget -O models/loras/FC_Flux_Perfect_Busts.safetensors https://huggingface.co/shahtab/FluxPonyPerfectFull/resolve/main/FC%20Flux%20Perfect%20Busts.safetensors
+    wget -O models/loras/FC_Flux_Perfect_Busts.safetensors https://huggingface.co/shahtab/FluxPonyPerfectFull/resolve/main/FC%20Flux%20Perfect%20Busts.safetensors && \
+    # Download upscaler models
+    wget -O models/upscale_models/4x_NMKD-Siax_200k.pth https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth && \
+    wget -O models/diffusion_models/flux1-dev-Q8_0.gguf https://huggingface.co/city96/FLUX.1-dev-gguf/resolve/main/flux1-dev-Q8_0.gguf && \
+    wget -O models/clip/t5-v1_1-xxl-encoder-Q8_0.gguf https://huggingface.co/city96/t5-v1_1-xxl-encoder-gguf/resolve/main/t5-v1_1-xxl-encoder-Q8_0.gguf
     
 # Stage 3: Final image
 FROM base as final
