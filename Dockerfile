@@ -10,23 +10,35 @@ ENV PYTHONUNBUFFERED=1
 # Speed up some cmake builds
 ENV CMAKE_BUILD_PARALLEL_LEVEL=8
 
-# Install Python, git and other necessary tools
-RUN apt-get update && apt-get install -y \
+# Update package lists and install core packages
+RUN apt-get update && apt-get upgrade -y
+
+# Install Python and basic tools
+RUN apt-get install -y \
     python3.10 \
     python3-pip \
     python3-dev \
     git \
     wget \
+    curl
+
+# Install OpenGL and graphics libraries
+RUN apt-get install -y \
     libgl1-mesa-glx \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
-    libxrender-dev \
+    libxrender-dev
+
+# Install build tools
+RUN apt-get install -y \
     cmake \
     build-essential \
     ninja-build \
-    pkg-config \
-    && ln -sf /usr/bin/python3.10 /usr/bin/python \
+    pkg-config
+
+# Create symlinks and cleanup
+RUN ln -sf /usr/bin/python3.10 /usr/bin/python \
     && ln -sf /usr/bin/pip3 /usr/bin/pip \
     && apt-get autoremove -y \
     && apt-get clean -y \
