@@ -17,6 +17,12 @@ RUN apt-get update && apt-get install -y \
     git \
     wget \
     libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    cmake \
+    build-essential \
     && ln -sf /usr/bin/python3.10 /usr/bin/python \
     && ln -sf /usr/bin/pip3 /usr/bin/pip
 
@@ -34,6 +40,18 @@ WORKDIR /comfyui
 
 # Install runpod
 RUN pip install runpod requests
+
+# Install required Python packages for custom nodes
+RUN pip install --no-cache-dir \
+    opencv-python-headless \
+    numpy \
+    torch \
+    torchvision \
+    && cd /tmp \
+    && git clone https://github.com/ggerganov/llama.cpp.git \
+    && cd llama.cpp \
+    && make \
+    && pip install -e .
 
 # Support for the network volume
 ADD src/extra_model_paths.yaml ./
