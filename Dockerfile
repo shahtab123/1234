@@ -23,6 +23,8 @@ RUN apt-get update && apt-get install -y \
     libxrender-dev \
     cmake \
     build-essential \
+    ninja-build \
+    pkg-config \
     && ln -sf /usr/bin/python3.10 /usr/bin/python \
     && ln -sf /usr/bin/pip3 /usr/bin/pip
 
@@ -50,7 +52,8 @@ RUN pip install --no-cache-dir \
     && cd /tmp \
     && git clone https://github.com/ggerganov/llama.cpp.git \
     && cd llama.cpp \
-    && make \
+    && cmake -B build -DCMAKE_BUILD_TYPE=Release \
+    && cmake --build build --config Release \
     && pip install -e .
 
 # Support for the network volume
