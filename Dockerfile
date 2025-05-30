@@ -10,8 +10,11 @@ ENV PYTHONUNBUFFERED=1
 # Speed up some cmake builds
 ENV CMAKE_BUILD_PARALLEL_LEVEL=8
 
+# Change to a different mirror to avoid 403 errors
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://ports.ubuntu.com/ubuntu-ports/|g' /etc/apt/sources.list
+
 # Install Python, git and other necessary tools
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --fix-missing \
     python3.10 \
     python3-pip \
     git \
@@ -26,10 +29,8 @@ RUN apt-get update && apt-get install -y \
     ninja-build \
     pkg-config \
     && ln -sf /usr/bin/python3.10 /usr/bin/python \
-    && ln -sf /usr/bin/pip3 /usr/bin/pip
-
-# Clean up to reduce image size
-RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+    && ln -sf /usr/bin/pip3 /usr/bin/pip \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install comfy-cli
 RUN pip install comfy-cli
@@ -40,7 +41,7 @@ RUN /usr/bin/yes | comfy --workspace /comfyui install --version 0.3.30 --cuda-ve
 # Change working directory to ComfyUI
 WORKDIR /comfyui
 
-# Install runpod
+# Install runpod and requests
 RUN pip install runpod requests
 
 # Install required Python packages for custom nodes
@@ -107,7 +108,7 @@ RUN wget --header="Authorization: Bearer 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" 
     wget -O models/upscale_models/4x_NMKD-Siax_200k.pth https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth && \
     wget -O models/diffusion_models/flux1-dev-Q8_0.gguf https://huggingface.co/city96/FLUX.1-dev-gguf/resolve/main/flux1-dev-Q8_0.gguf && \
     wget -O models/clip/t5-v1_1-xxl-encoder-Q8_0.gguf https://huggingface.co/city96/t5-v1_1-xxl-encoder-gguf/resolve/main/t5-v1_1-xxl-encoder-Q8_0.gguf
-    
+
 # Stage 3: Final image
 FROM base as final
 
