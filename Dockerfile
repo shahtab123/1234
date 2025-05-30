@@ -51,13 +51,6 @@ ADD *snapshot*.json /
 # Restore the snapshot to install custom nodes
 RUN /restore_snapshot.sh
 
-# Install required custom nodes for upscaler
-RUN cd /comfyui/custom_nodes && \
-    git clone https://github.com/yolain/ComfyUI-Easy-Use.git && \
-    git clone https://github.com/rgthree/rgthree-comfy.git && \
-    git clone https://github.com/city96/ComfyUI-GGUF.git && \
-    git clone https://github.com/shiimizu/ComfyUI-TiledDiffusion.git
-
 # Start container
 CMD ["/start.sh"]
 
