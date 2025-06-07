@@ -2,19 +2,7 @@
   "comfyui": "v0.3.30",
   "timestamp": "2024-12-30T12:00:00.000Z",
   "git_custom_nodes": {
-    "https://github.com/yolain/ComfyUI-Easy-Use": {
-      "hash": "main",
-      "disabled": false
-    },
-    "https://github.com/rgthree/rgthree-comfy": {
-      "hash": "main",
-      "disabled": false
-    },
-    "https://github.com/city96/ComfyUI-GGUF": {
-      "hash": "main",
-      "disabled": false
-    },
-    "https://github.com/shiimizu/ComfyUI-TiledDiffusion": {
+    "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch": {
       "hash": "main",
       "disabled": false
     }
