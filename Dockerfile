@@ -1,4 +1,4 @@
-# Stage 1: Base image with common dependencie
+# Stage 1: Base image with common dependencies
 FROM nvidia/cuda:12.6.3-cudnn-runtime-ubuntu22.04 AS base
 
 # Prevents prompts from packages asking for user input during installation
@@ -79,7 +79,7 @@ RUN wget --header="Authorization: Bearer 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" 
     # Download Pubic Hair Slider LoRA
     curl -L -o models/loras/pubic_hair_slider_ponysdxl.safetensors \
       -H "Authorization: Bearer fbd2dfc52e5b9f77ef1984525a1d226c" \
-      "https://civitai.com/api/download/models/484694?type=LoRA&format=SafeTensor"
+      "https://civitai.com/api/download/models/539041?type=Model&format=SafeTensor"
     
 # Stage 3: Final image
 FROM base as final
