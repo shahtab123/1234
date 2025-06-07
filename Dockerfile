@@ -64,21 +64,17 @@ ARG MODEL_TYPE=flux1-dev
 WORKDIR /comfyui
 
 # Create necessary directories
-RUN mkdir -p models/checkpoints models/vae models/unet models/clip models/loras models/upscale_models models/diffusion_models
+RUN mkdir -p models/checkpoints models/vae models/unet models/clip models/loras
 
 # Download flux1-dev model and its components
 RUN wget --header="Authorization: Bearer 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" -O models/unet/flux1-dev.safetensors https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors && \
     wget -O models/clip/clip_l.safetensors https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors && \
     wget -O models/clip/t5xxl_fp8_e4m3fn.safetensors https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors && \
     wget --header="Authorization: Bearer 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" -O models/vae/ae.safetensors https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors && \
-    wget -O models/loras/Ivory_Stranger_Flux_LoRA_v1.0.safetensors https://huggingface.co/shahtab/IvoryStranger/resolve/main/Ivory%20Stranger%20-%20Flux%20LoRA%20%20_v1.0.safetensors && \
-    wget -O models/loras/flux_topless_v1.safetensors https://huggingface.co/shahtab/FluxTopless/resolve/main/flux_topless_v1.safetensors && \
-    wget -O models/loras/aidmaNSFWunlock-FLUX-V0.2.safetensors https://huggingface.co/shahtab/FLUXNSFWunlock/resolve/main/aidmaNSFWunlock-FLUX-V0.2.safetensors && \
-    wget -O models/loras/FC_Flux_Perfect_Busts.safetensors https://huggingface.co/shahtab/FluxPonyPerfectFull/resolve/main/FC%20Flux%20Perfect%20Busts.safetensors && \
-    # Download upscaler models
-    wget -O models/upscale_models/4x_NMKD-Siax_200k.pth https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth && \
-    wget -O models/diffusion_models/flux1-dev-Q8_0.gguf https://huggingface.co/city96/FLUX.1-dev-gguf/resolve/main/flux1-dev-Q8_0.gguf && \
-    wget -O models/clip/t5-v1_1-xxl-encoder-Q8_0.gguf https://huggingface.co/city96/t5-v1_1-xxl-encoder-gguf/resolve/main/t5-v1_1-xxl-encoder-Q8_0.gguf
+    # Download Juggernaut XL inpainting model
+    wget --header="Authorization: Bearer fbd2dfc52e5b9f77ef1984525a1d226c" -O models/checkpoints/juggernautXL_inpainting.safetensors https://civitai.com/api/download/models/456538 && \
+    # Download Pubic Hair Slider LoRA
+    wget --header="Authorization: Bearer fbd2dfc52e5b9f77ef1984525a1d226c" -O models/loras/pubic_hair_slider_ponysdxl.safetensors https://civitai.com/api/download/models/484694
     
 # Stage 3: Final image
 FROM base as final
