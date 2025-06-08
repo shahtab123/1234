@@ -74,7 +74,7 @@ RUN wget --header="Authorization: Bearer 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" 
     wget --header="Authorization: Bearer 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" -O models/vae/ae.safetensors https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors && \
     # Download Juggernaut XL inpainting model
     wget --header="Authorization: Bearer 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" -O models/checkpoints/juggernautXL_inpainting.safetensors \
-      "https://huggingface.co/XuminYu/example_safetensors/resolve/88a8898da43a2ea461d5976dc2f249809e21c4bf/checkpoints/Juggernaut%20XL%20inpainting.safetensors" && \
+      https://huggingface.co/GraydientPlatformAPI/juggernaut-x-inpainting-sdxl/resolve/main/unet/diffusion_pytorch_model.safetensors && \
     # Download Pubic Hair Slider LoRA
     curl -L -o models/loras/pubic_hair_slider_ponysdxl.safetensors \
       -H "Authorization: Bearer fbd2dfc52e5b9f77ef1984525a1d226c" \
