@@ -75,7 +75,7 @@ RUN wget --header="Authorization: Bearer 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" 
     # Download Juggernaut XL inpainting model
     curl -L -o models/checkpoints/juggernautXL_inpainting.safetensors \
       -H "Authorization: Bearer fbd2dfc52e5b9f77ef1984525a1d226c" \
-      "https://civitai.com/api/download/models/456538?type=Model&format=SafeTensor" && \
+      "https://civitai.com/api/download/models/456538?type=Model&format=SafeTensor&size=pruned&fp=fp16" && \
     # Download Pubic Hair Slider LoRA
     curl -L -o models/loras/pubic_hair_slider_ponysdxl.safetensors \
       -H "Authorization: Bearer fbd2dfc52e5b9f77ef1984525a1d226c" \
